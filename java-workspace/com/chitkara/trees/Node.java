@@ -1,12 +1,12 @@
 package com.chitkara.trees;
 
 public class Node {
-    public int key;
-    public String value;
+    public String key;
+    public Integer value;
     public Node left;
     public Node right;
 
-    public Node(int k, String v) {
+    public Node(String k, Integer v) {
         this.key = k;
         this.value = v;
     }
@@ -17,11 +17,4 @@ public class Node {
         return "key=" + key + ":value=" + value;
     }
 
-    public int getKey() {
-        return this.key;
-    }
-
-    public void setValue(String v) {
-        this.value = v;
-    }
 }
