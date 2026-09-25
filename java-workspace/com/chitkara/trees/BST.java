@@ -1,9 +1,20 @@
 package com.chitkara.trees;
 
-import com.chitkara.trees.Node;
-
 public class BST {
     private Node root;
+
+    public static void main(String[] args) {
+        BST b = new BST();
+        b.insert(5, "a");
+        b.insert(3, "b");
+        b.insert(4, "c");
+        System.out.println(b.search(4));
+        System.out.println(b.search(2));
+
+        b.insert(2, "d");
+
+        System.out.println(b.search(2));
+    }
 
     public void insert(int k, String v) {
         root = insert(root, k, v);
@@ -41,19 +52,6 @@ public class BST {
             return search(n.right, k);
         }
         return search(n.left, k);
-    }
-
-    public static void main(String[] args) {
-        BST b = new BST();
-        b.insert(5, "a");
-        b.insert(3, "b");
-        b.insert(4, "c");
-        System.out.println(b.search(4));
-        System.out.println(b.search(2));
-
-        b.insert(2, "d");
-
-        System.out.println(b.search(2));
     }
 
 }
