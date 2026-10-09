@@ -1,14 +1,16 @@
 package com.chitkara.trees;
 
 public class Node {
-    public String key;
-    public Integer value;
+    public Integer key;
+    public String value;
     public Node left;
     public Node right;
+    public int N;
 
-    public Node(String k, Integer v) {
+    public Node(Integer k, String v) {
         this.key = k;
         this.value = v;
+        this.N = 1;
     }
 
 
