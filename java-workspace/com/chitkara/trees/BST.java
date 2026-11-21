@@ -1,8 +1,6 @@
 package com.chitkara.trees;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class BST {
     private Node root;
@@ -236,6 +234,89 @@ public class BST {
         x.right = n.right;
         return x;
 
+    }
+
+    private Node[] csdl(Node n) {
+        Node[] res = new Node[2];
+        if (n == null) return res;
+        if (n.left != null) {
+            Node[] lc = csdl(n.left);
+            Node t = lc[1] == null ? lc[0] : lc[1];
+            t.right = n;
+            n.left = t;
+            res[0] = lc[0];
+        }
+
+        if (n.right != null) {
+            Node[] rc = csdl(n.right);
+            rc[0].left = n;
+            n.right = rc[0];
+            res[1] = rc[1] == null ? rc[0] : rc[1];
+        }
+        if (res[0] == null) res[0] = n;
+        return res;
+    }
+
+    public void csdl() {
+        if (root == null)
+            return;
+        Node[] res = csdl(root);
+        //circular
+        if (res[1] != null) {
+            res[1].right = res[0];
+            res[0].left = res[1];
+        }
+        root = res[0];
+
+    }
+
+    public void printCsdl() {
+        System.out.print("\nCircular linked list : ");
+        Node temp = root;
+        do {
+            System.out.print(temp.key + "<=>");
+            temp = temp.right;
+        } while (!Objects.equals(temp.key, root.key));
+        System.out.print("(" + root.key + ")\n");
+    }
+
+    public int fca(int k1, int k2) {
+        return fca(root, k1, k2, null);
+    }
+
+    private int fca(Node n, int k1, int k2, Node p) {
+        if (n == null) return -1;
+        if (n.key == k1 || n.key == k2) return p == null ? -1 : p.key;
+        if (n.key > k1 && n.key > k2) return fca(n.left, k1, k2, n);
+        if (n.key < k1 && n.key < k2) return fca(n.right, k1, k2, n);
+        return n.key;
+    }
+
+    public void topView() {
+        Set<Integer> visited = new HashSet<>();
+        Queue<NodeWithCoordinate> q = new LinkedList<>();
+        q.add(new NodeWithCoordinate(root, 0));
+        while (!q.isEmpty()) {
+            NodeWithCoordinate t = q.poll();
+            if (!visited.contains(t.c)) {
+                System.out.println(t.n.key);
+                visited.add(t.c);
+            }
+            if (t.n.left != null)
+                q.add(new NodeWithCoordinate(t.n.left, t.c - 1));
+            if (t.n.right != null)
+                q.add(new NodeWithCoordinate(t.n.right, t.c + 1));
+        }
+    }
+
+    private static class NodeWithCoordinate {
+        private final Node n;
+        private final int c;
+
+        private NodeWithCoordinate(Node n, int c) {
+            this.n = n;
+            this.c = c;
+        }
     }
 
 }

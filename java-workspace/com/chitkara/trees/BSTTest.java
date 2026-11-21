@@ -1,5 +1,10 @@
 package com.chitkara.trees;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+
 public class BSTTest {
     public static void main(String[] args) {
         BST b = new BST();
@@ -9,6 +14,7 @@ public class BSTTest {
         b.insert(2, "two");
         b.insert(7, "seven");
         b.insert(9, "nine");
+
         System.out.println(b.search(8));
         System.out.println(b.search(9));
 
@@ -41,9 +47,21 @@ public class BSTTest {
         b.insert(9, "nine");
         b.insert(2, "two");
 
+
+        System.out.println(b.fca(2,5)); //-1
+        System.out.println(b.fca(2,4)); //3
+        System.out.println(b.fca(2,3)); //5
+        System.out.println(b.fca(7,9)); //5
+
         b.del(3);
         System.out.println();
         b.inOrder();
+        System.out.println();
+
+        b.topView();
+
+        b.csdl();
+        b.printCsdl();
 
     }
 }
